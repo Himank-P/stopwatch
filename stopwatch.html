@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #e4f1f7;
+        font-family: 'Manrope';
+
+    }
+    #clock{
+        background-color: #fff0f5;
+        color: #555b6e;
+        font-size: 2.5rem;
+        animation: pulse 1.5s infinite;
+        height: 400px;
+        margin: 20px;
+        border-radius: 100%;
+        width: 400px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    button{
+        width: 48%;
+        margin: 5px;
+        margin-top: 20px;
+        font-size: 2em;
+        transition: all 0.3s ease;
+        border-radius: 20px;
+        border: none;
+        background-color: #b8e0ff;
+        color: #3a3f58;
+        font-family: 'poppins';
+        text-align: center;
+    }
+    #buttons{
+        width: auto;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    button:hover{
+        background-color: #82c9ff;
+        color: #ffffff;
+        scale: 1.05;
+        box-shadow: 0 4px 12px rgba(165, 216, 255, 0.4);
+    }
+
+
+    #b2{
+        display:none;
+    }
+    #b3{
+        display: none;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 202, 212, 0.6); }
+        70% { box-shadow: 0 0 0 20px rgba(255, 202, 212, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 202, 212, 0); }
+    }
+</style>
+<body>
+<div id="container">
+    <div id="clock">
+        00:00:00
+</div>
+<div id="buttons">
+    <button id='b1'onclick="cstart()">Start</button>
+    <button id="b3" onclick="stop()">Stop</button>
+    <button id="b2" onclick="reset()">Reset</button>
+</div>
+</div>
+
+</body>
+
+<script>
+
+
+    var stopwatch = false;
+    var ms = 0;
+    var s = 0;
+    var m = 0;
+    var h = 0;
+    var output = document.getElementById('clock');
+    var b1 = document.getElementById('b1');
+    var b2 = document.getElementById('b2');
+    var b3 = document.getElementById('b3');
+
+    
+
+
+
+
+
+    
+
+    function run(){
+        if (stopwatch){
+            ms+=1
+
+            if (ms==100){
+                ms=0
+                s+=1
+            }
+            if (s == 60){
+                s=0
+                m+=1
+            }
+            if (m==60){
+                m=0
+                h+=1
+            }
+            
+            output.innerHTML = h.toString().padStart(2,0)+':'+m.toString().padStart(2,0)+':'+s.toString().padStart(2,0)+':'+ms.toString().padStart(2,0)
+        
+
+
+    }}
+    
+    function cstart(){
+        stopwatch=true
+        b2.style.display='inline-block'
+        b3.style.display='inline-block'
+        b1.style.display='none'
+
+        console.log('start')
+        run()
+    }
+    function stop(){
+        stopwatch=false
+        b3.style.display='none'
+        b1.style.display='inline-block'
+        console.log('stop')
+        run()
+    }
+    function reset(){
+        ms = 0
+        s = 0
+        h = 0
+        m = 0
+        output.innerHTML = h.toString().padStart(2,0)+':'+m.toString().padStart(2,0)+':'+s.toString().padStart(2,0)+':'+ms.toString().padStart(2,0)
+        if (stopwatch == false){
+            b2.style.display='none'
+        }
+
+    }
+
+    setInterval(run,10)
+    
+
+
+
+    </script>
+</html>
